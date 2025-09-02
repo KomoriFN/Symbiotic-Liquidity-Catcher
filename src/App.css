@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap');
+
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+}
+
+/* Название игры */
+.game-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ff88;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
+  text-align: center;
+  padding: 0 2rem;
+  animation: glow 2s ease-in-out infinite alternate;
+  letter-spacing: 1px;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.7),
+                 0 0 20px rgba(0, 255, 136, 0.5),
+                 0 0 30px rgba(0, 255, 136, 0.3);
+  }
+  to {
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.9),
+                 0 0 25px rgba(0, 255, 136, 0.7),
+                 0 0 35px rgba(0, 255, 136, 0.5);
+  }
+}
+
+.controls-info {
+  text-align: center;
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(3px);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.game-area {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.basket {
+  position: absolute;
+  bottom: 8%;
+  transform: translateX(-50%);
+  transition: left 0.2s ease-out;
+  z-index: 10;
+  padding: 20px;
+}
+
+.wallet-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(0, 255, 136, 0.9));
+}
+
+.token {
+  position: absolute;
+  transition: 
+    top 0.1s linear,
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  z-index: 5;
+  will-change: top, opacity, transform;
+}
+
+.token-image {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  filter: 
+    drop-shadow(0 0 20px #00ff88)
+    brightness(1.1)
+    contrast(1.2);
+  transition: all 0.3s ease;
+}
+
+.token {
+  animation: token-appear 0.3s ease-out;
+}
+
+@keyframes token-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.token.caught {
+  animation: disappear 0.4s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 25px #00ff88);
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 40px #00ff88) brightness(1.5);
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+    filter: drop-shadow(0 0 0px #00ff88);
+  }
+}
+
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  border: 3px solid #00ff88;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 50px rgba(0, 255, 136, 0.4);
+  font-family: 'Exo 2', sans-serif;
+}
+
+.game-over h2 {
+  margin: 0 0 1.5rem 0;
+  color: #00ff88;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+  letter-spacing: 1px;
+}
+
+.game-over p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.game-over button {
+  background: linear-gradient(45deg, #00ff88, #00cc66);
+  color: #000;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.game-over button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .game-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+  
+  .game-title {
+    font-size: 1.4rem;
+    padding: 0.5rem 0;
+    order: -1;
+  }
+  
+  .wallet-image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .token-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .game-over {
+    padding: 2rem;
+    width: 90%;
+  }
+  
+  .game-over h2 {
+    font-size: 2rem;
+  }
+  
+  .game-over p {
+    font-size: 1.2rem;
+  }
+}
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+  border: 3px solid #00ff88;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 50px rgba(0, 255, 136, 0.4);
+  font-family: 'Exo 2', sans-serif;
+  min-width: 350px;
+}
+
+.game-over h2 {
+  margin: 0 0 1.5rem 0;
+  color: #00ff88;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.7);
+  letter-spacing: 1px;
+}
+
+.game-over p {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.game-over-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.game-over button {
+  background: linear-gradient(45deg, #00ff88, #00cc66);
+  color: #000;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.game-over button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+}
+
+/* Специальные стили для кнопки Staking */
+.staking-button {
+  background: linear-gradient(45deg, #00ff88, #00ff88) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.6) !important;
+}
+
+.staking-button:hover {
+  background: linear-gradient(45deg, #00ff88, #00ff88) !important;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.6) !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .game-over {
+    padding: 2rem;
+    width: 90%;
+    min-width: unset;
+  }
+  
+  .game-over h2 {
+    font-size: 2rem;
+  }
+  
+  .game-over p {
+    font-size: 1.2rem;
+  }
+  
+  .game-over-buttons {
+    flex-direction: column;
+  }
+  
+  .game-over button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+  }
+}
